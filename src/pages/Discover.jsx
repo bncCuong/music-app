@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Error, Loader, SongCard } from '../components';
 import { genres } from '../assets/constants';
+import { useGetTopChartsQuery } from '../redux/services/music-api';
 
 const Discover = () => {
     const dispatch = useDispatch();
-    const { activerSong, isPlaying, data } = useSelector((state) => state.player);
-    // if (isFetching) return <Loader title="Loading songs..." />;
-    // if (error) return <Error />;
+    const { data, isError, isFetching } = useGetTopChartsQuery();
+    const { activerSong, isPlaying } = useSelector((state) => state.player);
+    if (isFetching) return <Loader title="Loading songs..." />;
+    if (isError) return <Error />;
 
     return (
         <div className="flex flex-col">
@@ -25,7 +27,7 @@ const Discover = () => {
                 </select>
             </div>
             <div className="flex flex-wrap justify-center gap-8 sm:justify-start">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, i) => (
+                {data.map((item, i) => (
                     <SongCard
                         key={item.key}
                         song={item}
