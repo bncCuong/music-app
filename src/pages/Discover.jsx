@@ -6,7 +6,7 @@ import { useGetTopChartsQuery } from '../redux/services/music-api';
 const Discover = () => {
     const dispatch = useDispatch();
     const { data, isError, isFetching } = useGetTopChartsQuery();
-    const { activerSong, isPlaying } = useSelector((state) => state.player);
+    const { activeSong, isPlaying } = useSelector((state) => state.player);
     if (isFetching) return <Loader title="Loading songs..." />;
     if (isError) return <Error />;
 
@@ -34,7 +34,7 @@ const Discover = () => {
                         i={i}
                         data={data}
                         isPlaying={isPlaying}
-                        activerSong={activerSong}
+                        activeSong={activeSong}
                     />
                 ))}
             </div>
