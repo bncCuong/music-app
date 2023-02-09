@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { DetailsHeader, Error, Loader, RelatedSongs } from '../components';
 
-import { useGetSongDetailsQuery } from '../redux/services/music-api';
+import { useGetSongDetailsQuery } from '../redux/services/shazamCore';
 import { setActiveSong, playPause } from '../redux/features/playerSlice';
 
 const SongDetails = () => {
